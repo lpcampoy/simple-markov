@@ -36,7 +36,7 @@ class State(object):
             if 0 < Fraction(d[1]) <= 1
         }
         self.cum_prob = list(accumulate(v for v in self.prob.values()))
-        if self.cum_prob[-1] != 1:
+        if abs(1 - self.cum_prob[-1]) >= 0.0001:
             raise ValueError("Transitions from state " + str(label) +
                     " do not form a probability distribution")
         self.label = label
@@ -93,7 +93,7 @@ class MarkovChain(object):
             k : Fraction(v) for k,v in initial_distrib.items()
         }
 
-        if sum(self.initial_probs.values()) != 1:
+        if abs(1 - sum(self.initial_probs.values())) >= 0.0001:
             raise ValueError(
                 "Initial probabilities don't form a proper distribution"
             )
