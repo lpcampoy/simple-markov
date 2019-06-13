@@ -228,7 +228,7 @@ class MarkovChain(object):
                             continue
                 # get data and row - column vectors for sparse representation
                 data, row, col = zip(*sparse_frame)
-                self.prob_matrix = sparse.coo_matrix(
+                self.prob_matrix = coo_matrix(
                     (data, (row, col)),
                     shape=(size, size)
                 )
